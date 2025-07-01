@@ -267,8 +267,8 @@
         address1: $('#address1').val(),
         address2: $('#address2').val(),
       };
-      if (window.flutter_inappwebview) {
-        window.flutter_inappwebview.callHandler('onFormSubmit', data);
+      if (window.onAddressFormSubmitChannel) {
+        window.onAddressFormSubmitChannel.postMessage(JSON.stringify(data));
       } else {
         alert('Sending to Flutter: ' + JSON.stringify(data));
       }

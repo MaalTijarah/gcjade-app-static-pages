@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Crypto Payment Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <!-- <h4 class="mb-4 text-center">Crypto Payment Form</h4> -->
+                <div class="alert alert-warning" role="alert">
+                    <strong>Important Notes before you make payment with crypto:</strong>
+                    <ul class="mb-0">
+                        <li>Ensure you select the correct network to avoid loss of funds.</li>
+                        <li>You can pay from any crypto wallet or exchange wallet that supports
+                            <strong>USDT/RUSD</strong>. This includes popular wallets like MetaMask, Trust Wallet,
+                            Coinbase and GenZ wallet.
+                        </li>
+                        <li>After completing the transfer, please upload the transaction hash for verification.</li>
+                        <li><strong>Only send USDT / RUSD on BSC network.</strong> Sending the payment on any other
+                            network may result in a loss of those digital assets.
+                        </li>
+                        <li class="alert-error text-danger">* GCJade will not be held responsible for any loss of
+                            digital assets resulting from using the
+                            wrong network!</li>
+                    </ul>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Steps to Complete Your Payment:</h5>
+                        <div class="mb-3">
+                            <span class="fw-bold">1.</span>
+                            <label for="txHash" class="form-label d-inline">Please enter the transaction hash you
+                                received:</label>
+                            <input type="text" class="form-control mt-2" id="txHash" maxlength="66" required
+                                pattern="^.{66}$" placeholder="Transaction Hash">
+                            <div class="form-text">Transaction hash must be exactly 66 characters.</div>
+                        </div>
+                        <div class="mb-3">
+                            <span class="fw-bold">2.</span>
+                            <span>Copy and transfer the payment to the following wallet address:</span>
+                            <div class="wallet-address d-flex align-items-center justify-content-between flex-wrap mt-2"
+                                id="walletAddress">
+                                <div>
+                                    <div><strong>RUSD (BSC):</strong></div>
+                                    <div class="mb-2 text-success fw-normal"><span id="rusdAddress">0x9385eD8a68accfc7dC6575E8c23759f800791EdE</span>
+                                    </div>
+                                    <div><strong>USDT (BSC):</strong></div>
+                                    <div class="text-success fw-normal"><span id="usdtAddress">0x9385eD8a68accfc7dC6575E8c23759f800791EdE</span></div>
+                                </div>
+                                <div class="d-flex flex-column align-items-center ms-2 mt-2 mt-md-0">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm"
+                                        onclick="copyWalletAddress()">Copy</button>
+                                    <span id="copyLabel" class="badge bg-success mt-2 d-none">Copied!</span>
+                                </div>
+                            </div>
+                            <div class="text-center mb-2">Or Scan the QR Code with your wallet app!</div>
+                            <div class="text-center mb-3">
+                                <img src="images/address-qr.jpg" alt="Wallet QR Code" class="qr-img">
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-secondary" onclick="history.back()">Back</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="formAlert"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+    function copyWalletAddress() {
+        const address = document.getElementById('rusdAddress').textContent;
+        navigator.clipboard.writeText(address).then(function() {
+            var label = document.getElementById('copyLabel');
+            label.classList.remove('d-none');
+            setTimeout(function() {
+                label.classList.add('d-none');
+            }, 1500);
+        }, function(err) {
+            // Optionally handle error
+        });
+    }
+
+    function submitForm() {
+        const txHash = document.getElementById('txHash').value.trim();
+        let alertBox = document.getElementById('formAlert');
+        alertBox.innerHTML = '';
+        if (txHash.length !== 66) {
+            alertBox.innerHTML = '<div class="alert alert-danger mt-2">Transaction hash must be exactly 66 characters.</div>';
+            return;
+        }
+        const data = {
+            txHash: txHash
+        };
+        if (window.onCryptoPaymentFormSubmitChannel) {
+            window.onCryptoPaymentFormSubmitChannel.postMessage(JSON.stringify(data));
+        } else {
+            alert('Sending to Flutter: ' + JSON.stringify(data));
+        }
+    }
+    // Attach to button
+    const submitBtn = document.getElementById('submitBtn');
+    if (submitBtn) {
+        submitBtn.onclick = function(e) {
+            e.preventDefault();
+            submitForm();
+        };
+    }
+    </script>
+</body>
+
+</html>

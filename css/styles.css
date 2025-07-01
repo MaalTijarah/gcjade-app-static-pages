@@ -1,0 +1,36 @@
+/* Main stylesheet for GCJade static pages */
+.qr-img {
+    max-width: 240px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 1rem;
+    border: 2px solid #e0e0e0;
+    padding: 1rem;
+}
+
+.wallet-address {
+    font-family: monospace;
+    word-break: break-all;
+    font-size: 1rem;
+    background: #f8f9fa;
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+/* .wallet-address span#rusdAddress,
+.wallet-address span#usdtAddress {
+    color: #198754; 
+    font-weight: bold;
+} */
+
+/* Custom styles for card component */
+.card.mb-4 ol {
+    padding-left: 1rem;
+}
+
+.card.mb-4 ol li {
+    padding-left: 0.5rem;
+}

@@ -136,9 +136,9 @@ function submitForm() {
     country: $('#country').val(),
     state: $('#state').val(),
     city: $('#city').val(),
-    zip: $('#zip').val(),
-    address1: $('#address1').val(),
-    address2: $('#address2').val(),
+    postalCode: $('#zip').val(),
+    addressLine1: $('#address1').val(),
+    addressLine2: $('#address2').val(),
   };
   if (window.onAddressFormSubmitChannel) {
     window.onAddressFormSubmitChannel.postMessage(JSON.stringify(data));

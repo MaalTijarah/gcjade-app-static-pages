@@ -41,14 +41,6 @@
                         <h5 class="card-title">Steps to Complete Your Payment:</h5>
                         <div class="mb-3">
                             <span class="fw-bold">1.</span>
-                            <label for="txHash" class="form-label d-inline">Please enter the transaction hash you
-                                received:</label>
-                            <input type="text" class="form-control mt-2" id="txHash" maxlength="66" required
-                                pattern="^.{66}$" placeholder="Transaction Hash">
-                            <div class="form-text">Transaction hash must be exactly 66 characters.</div>
-                        </div>
-                        <div class="mb-3">
-                            <span class="fw-bold">2.</span>
                             <span>Copy and transfer the payment to the following wallet address:</span>
                             <div class="wallet-address d-flex align-items-center justify-content-between flex-wrap mt-2"
                                 id="walletAddress">
@@ -72,9 +64,17 @@
                                 <img src="images/address-qr.jpg" alt="Wallet QR Code" class="qr-img">
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <span class="fw-bold">2.</span>
+                            <label for="txHash" class="form-label d-inline">Please enter the transaction hash you
+                                received:</label>
+                            <input type="text" class="form-control mt-2" id="txHash" maxlength="66" required
+                                pattern="^.{66}$" placeholder="Transaction Hash">
+                            <div class="form-text">Transaction hash must be exactly 66 characters.</div>
+                        </div>
                         <div class="d-flex justify-content-between mt-4">
                             <button type="button" class="btn btn-secondary" onclick="history.back()">Back</button>
-                            <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+                            <button type="button" class="btn btn-custom-submit" onclick="submitForm()">Submit</button>
                         </div>
                     </div>
                 </div>
@@ -115,17 +115,14 @@
             }
         }
         // Attach to button
-        const submitBtn = document.getElementById('submitBtn');
-        if (submitBtn) {
-            submitBtn.onclick = function (e) {
-                e.preventDefault();
-                submitForm();
-            };
-        }
+        // const submitBtn = document.getElementById('submitBtn');
+        // if (submitBtn) {
+        //     submitBtn.onclick = function (e) {
+        //         e.preventDefault();
+        //         submitForm();
+        //     };
+        // }
 
-        function setAmount(value) {
-            document.getElementById('amountToPay').textContent = value;
-        }
     </script>
 </body>
 

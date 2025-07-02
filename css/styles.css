@@ -34,3 +34,16 @@
 .card.mb-4 ol li {
     padding-left: 0.5rem;
 }
+
+.btn-custom-submit {
+    background-color: #00A86B !important;
+    border-color: #00A86B !important;
+    color: #fff !important;
+}
+
+.btn-custom-submit:hover,
+.btn-custom-submit:focus {
+    background-color: #008f5a !important;
+    border-color: #008f5a !important;
+    color: #fff !important;
+}
